@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSAccessibilityUsageDescription</key>
+    <string>laMyl needs accessibility access to detect keyboard events and play sounds. Your keystrokes stay on your Mac and are never recorded or transmitted.</string>
+</dict>
+</plist>

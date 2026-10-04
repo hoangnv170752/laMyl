@@ -1,19 +1,19 @@
 # laMyl — Product Backlog
 
-> **laMyl**  
+> **laMyl**
 > *sounds good. feels better.*
 
 ## 1. Product Vision
 
-laMyl là một ứng dụng âm thanh dành cho người làm việc trên máy tính, lấy cảm hứng từ trải nghiệm **gõ bàn phím cơ**.
+laMyl is an audio application for computer users, inspired by the **mechanical keyboard** typing experience.
 
-Thay vì chỉ mô phỏng tiếng keyboard, laMyl hướng tới việc tạo ra một **âm thanh làm việc dễ chịu**, giúp người dùng cảm thấy tập trung, thư giãn và có cảm hứng hơn.
+Rather than simply simulating keyboard sounds, laMyl aims to create a **pleasant working soundscape** that helps users feel focused, relaxed, and inspired.
 
-### Core idea
+### Core Idea
 
 > **Make every keystroke feel better.**
 
-### Product direction
+### Product Direction
 
 ```text
 Keyboard Sounds
@@ -27,9 +27,9 @@ Focus & Productivity
 
 ---
 
-# 2. Target Users
+## 2. Target Users
 
-## Primary
+### Primary
 
 - Developer / Programmer
 - Designer
@@ -38,108 +38,108 @@ Focus & Productivity
 - Content creator
 - Remote worker
 - Mechanical keyboard enthusiast
-- Người thích ASMR / typing sounds
+- ASMR / typing sounds lover
 
-## User needs
+### User Needs
 
-- Muốn nghe tiếng keyboard cơ học khi dùng laptop.
-- Muốn tiếng gõ rõ nhưng không cần bật loa Mac quá lớn.
-- Muốn lựa chọn giữa nhiều loại switch / keyboard sound.
-- Muốn âm thanh dễ chịu khi làm việc trong thời gian dài.
-- Muốn tạo không gian âm thanh riêng cho từng trạng thái làm việc.
+- Want to hear mechanical keyboard sounds when using a laptop.
+- Want clear typing sounds without turning Mac speakers too loud.
+- Want to choose between different switch / keyboard sound types.
+- Want pleasant audio during long work sessions.
+- Want to create a personal sound environment for different work states.
 
 ---
 
-# 3. MVP Scope
+## 3. MVP Scope
 
-## MVP Goal
+### MVP Goal
 
-Người dùng có thể:
+Users can:
 
-1. Mở laMyl.
-2. Chọn một keyboard sound.
-3. Gõ bất kỳ đâu trên Mac.
-4. laMyl phát âm thanh tương ứng với từng phím.
-5. Điều chỉnh volume.
-6. Sử dụng **Low Volume Boost** để nghe rõ ở mức volume hệ thống thấp.
-7. Bật/tắt nhanh laMyl từ menu bar.
-8. Chọn preset âm thanh.
+1. Open laMyl.
+2. Select a keyboard sound.
+3. Type anywhere on Mac.
+4. laMyl plays corresponding sounds for each key.
+5. Adjust volume.
+6. Use **Low Volume Boost** to hear clearly at low system volume.
+7. Quickly toggle laMyl from the menu bar.
+8. Select sound presets.
 
-### MVP must feel
+### MVP Must Feel
 
 - Instant
 - Lightweight
 - Minimal
 - Calm
 - Premium
-- Không gây phân tâm
+- Non-distracting
 
 ---
 
-# 4. Product Backlog
+## 4. Product Backlog
 
-## Epic 01 — macOS Foundation
+### Epic 01 — macOS Foundation
 
-### P0 — MVP
+#### P0 — MVP
 
-- [ ] Tạo macOS application project.
-- [ ] Thiết lập app lifecycle.
-- [ ] Thiết lập Menu Bar app.
-- [ ] Không yêu cầu mở một cửa sổ chính liên tục.
-- [ ] App có thể chạy background.
-- [ ] App có thể Start / Stop.
-- [ ] App có thể Quit hoàn toàn.
-- [ ] Thiết lập permission cần thiết để nhận biết keyboard input.
-- [ ] Xử lý keyboard event toàn hệ thống.
-- [ ] Không block hoặc thay đổi keyboard input gốc.
-- [ ] Không gửi nội dung phím người dùng ra ngoài app.
+- [ ] Create macOS application project.
+- [ ] Set up app lifecycle.
+- [ ] Set up Menu Bar app.
+- [ ] No requirement for a persistent main window.
+- [ ] App can run in background.
+- [ ] App can Start / Stop.
+- [ ] App can Quit completely.
+- [ ] Set up required permissions for keyboard input detection.
+- [ ] Handle system-wide keyboard events.
+- [ ] Do not block or modify original keyboard input.
+- [ ] Do not send user keystroke content outside the app.
 
-### Acceptance Criteria
+#### Acceptance Criteria
 
-- App chạy ổn định khi sử dụng các app khác.
-- Keyboard vẫn hoạt động bình thường.
-- Không làm tăng CPU bất thường.
-- Có thể bật/tắt sound mà không restart app.
+- App runs stably while using other apps.
+- Keyboard works normally.
+- No abnormal CPU usage.
+- Can toggle sound without restarting app.
 
 ---
 
-# Epic 02 — Keyboard Sound Engine
+### Epic 02 — Keyboard Sound Engine
 
-## P0 — MVP
+#### P0 — MVP
 
-- [ ] Xây dựng Audio Engine.
-- [ ] Load audio samples vào memory.
-- [ ] Preload các sample thường dùng.
-- [ ] Mapping key → sound.
-- [ ] Hỗ trợ press sound.
-- [ ] Hỗ trợ release sound nếu cần.
-- [ ] Random variation giữa các lần gõ.
-- [ ] Random pitch variation rất nhẹ.
+- [ ] Build Audio Engine.
+- [ ] Load audio samples into memory.
+- [ ] Preload frequently used samples.
+- [ ] Map key → sound.
+- [ ] Support press sound.
+- [ ] Support release sound if needed.
+- [ ] Random variation between keystrokes.
+- [ ] Subtle random pitch variation.
 - [ ] Random volume variation.
-- [ ] Tránh âm thanh bị lặp quá rõ.
-- [ ] Xử lý nhiều key event liên tục.
-- [ ] Voice pooling để tránh audio overlap quá mức.
-- [ ] Giới hạn số audio voices đồng thời.
+- [ ] Avoid obvious sound repetition.
+- [ ] Handle multiple consecutive key events.
+- [ ] Voice pooling to prevent excessive audio overlap.
+- [ ] Limit simultaneous audio voices.
 
-### P1
+#### P1
 
 - [ ] Velocity-sensitive sound.
 - [ ] Key-specific sound.
-- [ ] Spacebar sound riêng.
-- [ ] Enter sound riêng.
-- [ ] Backspace sound riêng.
-- [ ] Modifier key sound riêng.
-- [ ] Different sound cho mouse click.
+- [ ] Separate spacebar sound.
+- [ ] Separate enter sound.
+- [ ] Separate backspace sound.
+- [ ] Separate modifier key sound.
+- [ ] Different sound for mouse click.
 
 ---
 
-# Epic 03 — Keyboard Sound Library
+### Epic 03 — Keyboard Sound Library
 
-## P0 — MVP
+#### P0 — MVP
 
-Tối thiểu 5–8 sound profiles.
+Minimum 5–8 sound profiles.
 
-### Suggested profiles
+##### Suggested Profiles
 
 - [ ] Soft Linear
 - [ ] Deep Thock
@@ -150,7 +150,7 @@ Tối thiểu 5–8 sound profiles.
 - [ ] Typewriter
 - [ ] Retro
 
-### Mỗi profile
+##### Each Profile Includes
 
 - [ ] Name
 - [ ] Short description
@@ -159,7 +159,7 @@ Tối thiểu 5–8 sound profiles.
 - [ ] Default volume
 - [ ] Character / mood
 
-### P1
+#### P1
 
 - [ ] Gateron-style Linear
 - [ ] Cherry-style Brown
@@ -170,31 +170,31 @@ Tối thiểu 5–8 sound profiles.
 - [ ] Buckling Spring
 - [ ] Low-profile keyboard
 
-> Lưu ý: nếu sử dụng tên/thương hiệu/sound recording của bên thứ ba, cần kiểm tra quyền sử dụng và licensing trước khi phát hành.
+> Note: If using third-party names/brands/sound recordings, verify usage rights and licensing before release.
 
 ---
 
-# Epic 04 — Low Volume Boost
+### Epic 04 — Low Volume Boost
 
-## P0 — Key Differentiator
+#### P0 — Key Differentiator
 
-Mục tiêu:
+Goal:
 
-> **Âm thanh keyboard vẫn rõ, dày và dễ nghe khi system volume của Mac ở mức thấp.**
+> **Keyboard audio remains clear, full, and pleasant even when Mac system volume is low.**
 
-### Audio processing
+##### Audio Processing
 
 - [ ] Input gain control.
 - [ ] Loudness normalization.
 - [ ] Gentle compression.
 - [ ] Transient enhancement.
-- [ ] EQ cho speech/keyboard presence.
+- [ ] EQ for speech/keyboard presence.
 - [ ] Warmth control.
 - [ ] Thock enhancement.
-- [ ] Limiter chống clipping.
+- [ ] Limiter to prevent clipping.
 - [ ] Auto gain compensation.
 
-### UI
+##### UI
 
 ```text
 Volume
@@ -212,19 +212,19 @@ Thock
 ────────●───────
 ```
 
-### Acceptance Criteria
+##### Acceptance Criteria
 
-- Không clipping.
-- Không tạo distortion khó chịu.
-- Không làm tiếng phím quá chói.
-- Có thể nghe rõ ở system volume thấp.
-- Không gây fatigue khi sử dụng lâu.
+- No clipping.
+- No unpleasant distortion.
+- No harsh key sounds.
+- Clear audio at low system volume.
+- No fatigue during extended use.
 
 ---
 
-# Epic 05 — Main Menu Bar UI
+### Epic 05 — Main Menu Bar UI
 
-## P0
+#### P0
 
 Menu Bar popup:
 
@@ -249,7 +249,7 @@ Settings
 Quit laMyl
 ```
 
-### Tasks
+##### Tasks
 
 - [ ] Menu bar icon.
 - [ ] Popup panel.
@@ -263,17 +263,17 @@ Quit laMyl
 
 ---
 
-# Epic 06 — Sound Preview
+### Epic 06 — Sound Preview
 
-## P0
+#### P0
 
-- [ ] Preview button cho từng sound.
-- [ ] Preview không cần keyboard event.
-- [ ] Preview sample ngắn.
-- [ ] Preview nhiều phím liên tiếp.
-- [ ] Preview loop tùy chọn.
+- [ ] Preview button for each sound.
+- [ ] Preview without keyboard event.
+- [ ] Short preview sample.
+- [ ] Preview multiple consecutive keys.
+- [ ] Optional preview loop.
 
-## P1
+#### P1
 
 - [ ] Compare 2 sounds.
 - [ ] A/B testing.
@@ -282,11 +282,11 @@ Quit laMyl
 
 ---
 
-# Epic 07 — Settings
+### Epic 07 — Settings
 
-## P0
+#### P0
 
-### General
+##### General
 
 - [ ] Launch at login.
 - [ ] Start sound automatically.
@@ -294,7 +294,7 @@ Quit laMyl
 - [ ] Default sound.
 - [ ] Default volume.
 
-### Audio
+##### Audio
 
 - [ ] Volume.
 - [ ] Low Volume Boost.
@@ -303,7 +303,7 @@ Quit laMyl
 - [ ] Thock.
 - [ ] Max simultaneous sounds.
 
-### Privacy
+##### Privacy
 
 - [ ] Explain keyboard monitoring.
 - [ ] Explain that key content is not recorded.
@@ -312,9 +312,9 @@ Quit laMyl
 
 ---
 
-# Epic 08 — Global Keyboard Shortcuts
+### Epic 08 — Global Keyboard Shortcuts
 
-## P1
+#### P1
 
 - [ ] Toggle sound.
 - [ ] Next sound.
@@ -323,7 +323,7 @@ Quit laMyl
 - [ ] Volume down.
 - [ ] Pause / resume.
 
-### Suggested defaults
+##### Suggested Defaults
 
 ```text
 ⌥ + Space       Toggle sound
@@ -337,15 +337,63 @@ Shortcut mapping should be configurable.
 
 ---
 
-# Epic 09 — Presets / Mood
+### Epic 08.1 — Multi-Language Support
 
-## P1 — Post MVP
+#### P1
+
+Support multiple languages for the entire app UI.
+
+##### Supported Languages
+
+- [ ] English (default)
+- [ ] Vietnamese (Tiếng Việt)
+- [ ] French (Français)
+- [ ] Chinese (中文 - Simplified & Traditional)
+
+##### Tasks
+
+- [ ] Set up localization infrastructure (Localizable.strings).
+- [ ] Create string catalogs for each language.
+- [ ] Localize all UI text (menu bar, settings, onboarding).
+- [ ] Localize sound profile names and descriptions.
+- [ ] Localize error messages and alerts.
+- [ ] Auto-detect system language preference.
+- [ ] Allow manual language selection in Settings.
+- [ ] Support right-to-left layouts if needed for future languages.
+- [ ] Test all UI layouts with longer translated strings.
+
+##### Settings UI
+
+```text
+Language
+────────────────────
+○ System Default
+● English
+○ Tiếng Việt
+○ Français
+○ 中文 (简体)
+○ 中文 (繁體)
+```
+
+##### Acceptance Criteria
+
+- App respects macOS system language by default.
+- User can override language in Settings.
+- All visible text is properly translated.
+- UI does not break with longer translations.
+- Language change applies immediately without restart.
+
+---
+
+### Epic 09 — Presets / Mood
+
+#### P1 — Post MVP
 
 Introduce the idea:
 
 > **How do you want to feel?**
 
-### Presets
+##### Presets
 
 - [ ] Deep Focus
 - [ ] Calm
@@ -379,9 +427,9 @@ ON
 
 ---
 
-# Epic 10 — Ambient Sounds
+### Epic 10 — Ambient Sounds
 
-## P1
+#### P1
 
 - [ ] Rain
 - [ ] Café
@@ -392,7 +440,7 @@ ON
 - [ ] Forest
 - [ ] Ocean
 
-### Mixer
+##### Mixer
 
 ```text
 Keyboard       70%
@@ -402,9 +450,9 @@ Cafe           10%
 
 ---
 
-# Epic 11 — Focus Timer
+### Epic 11 — Focus Timer
 
-## P2
+#### P2
 
 - [ ] 25-minute timer.
 - [ ] 50-minute timer.
@@ -416,9 +464,9 @@ Cafe           10%
 
 ---
 
-# Epic 12 — Personalization
+### Epic 12 — Personalization
 
-## P2
+#### P2
 
 - [ ] Favorite sounds.
 - [ ] Recently used sounds.
@@ -430,9 +478,9 @@ Cafe           10%
 
 ---
 
-# Epic 13 — Sound Designer
+### Epic 13 — Sound Designer
 
-## P2
+#### P2
 
 Advanced sound customization:
 
@@ -464,9 +512,9 @@ Features:
 
 ---
 
-# Epic 14 — Analytics / Telemetry
+### Epic 14 — Analytics / Telemetry
 
-## MVP principle
+#### MVP Principle
 
 **Do not collect keyboard content.**
 
@@ -489,9 +537,9 @@ Analytics should be opt-in or clearly disclosed depending on implementation and 
 
 ---
 
-# Epic 15 — Onboarding
+### Epic 15 — Onboarding
 
-## P1
+#### P1
 
 First launch:
 
@@ -528,17 +576,17 @@ laMyl does not record what you type.
 
 ---
 
-# Epic 16 — Branding
+### Epic 16 — Branding
 
-## Brand
+#### Brand
 
 **laMyl**
 
-### Tagline
+##### Tagline
 
 > **sounds good. feels better.**
 
-### Brand attributes
+##### Brand Attributes
 
 - Calm
 - Modern
@@ -548,7 +596,7 @@ laMyl does not record what you type.
 - Playful
 - Personal
 
-### Visual direction
+##### Visual Direction
 
 - Minimal UI.
 - Soft gradients.
@@ -560,9 +608,9 @@ laMyl does not record what you type.
 
 ---
 
-# Epic 17 — App Store Readiness
+### Epic 17 — App Store Readiness
 
-## P0
+#### P0
 
 - [ ] App icon.
 - [ ] App name.
@@ -587,7 +635,7 @@ laMyl does not record what you type.
 
 ---
 
-# 5. Technical Architecture
+## 5. Technical Architecture
 
 Suggested architecture:
 
@@ -625,28 +673,28 @@ Keyboard Manager    Settings
 
 ---
 
-# 6. Recommended Technology
+## 6. Recommended Technology
 
-## Platform
+### Platform
 
 **macOS**
 
-## Language
+### Language
 
 **Swift**
 
-## UI
+### UI
 
 **SwiftUI**
 
-## System integration
+### System Integration
 
 - CGEvent / relevant macOS event APIs
 - Accessibility / Input Monitoring permissions
 - MenuBarExtra
 - AppKit where required
 
-## Audio
+### Audio
 
 Prefer Apple's native audio stack:
 
@@ -663,7 +711,7 @@ Avoid unnecessary external dependencies for MVP.
 
 ---
 
-# 7. Performance Requirements
+## 7. Performance Requirements
 
 ### Target
 
@@ -675,7 +723,7 @@ Avoid unnecessary external dependencies for MVP.
 - No audio dropouts during fast typing.
 - No noticeable input lag.
 
-### Stress test
+### Stress Test
 
 Simulate:
 
@@ -689,7 +737,7 @@ Simulate:
 
 ---
 
-# 8. MVP Definition of Done
+## 8. MVP Definition of Done
 
 The MVP is ready when:
 
@@ -710,16 +758,16 @@ The MVP is ready when:
 
 ---
 
-# 9. Post-MVP Roadmap
+## 9. Post-MVP Roadmap
 
-## Version 0.1 — Prototype
+### Version 0.1 — Prototype
 
 - Keyboard event detection
 - One sound
 - Basic audio playback
 - Menu bar
 
-## Version 0.2 — MVP
+### Version 0.2 — MVP
 
 - 5–8 sounds
 - Sound selector
@@ -729,7 +777,7 @@ The MVP is ready when:
 - Launch at login
 - Privacy UX
 
-## Version 0.3 — Experience
+### Version 0.3 — Experience
 
 - Favorites
 - Presets
@@ -738,14 +786,14 @@ The MVP is ready when:
 - Better onboarding
 - Premium UI polish
 
-## Version 0.5 — Soundscape
+### Version 0.5 — Soundscape
 
 - Ambient sounds
 - Mixer
 - Mood presets
 - Focus mode
 
-## Version 1.0 — Productivity
+### Version 1.0 — Productivity
 
 - Focus timer
 - Custom soundscape
@@ -755,7 +803,7 @@ The MVP is ready when:
 
 ---
 
-# 10. Future Monetization
+## 10. Future Monetization
 
 Potential model:
 
@@ -784,13 +832,13 @@ For this product, **one-time purchase or lifetime unlock should be seriously con
 
 ---
 
-# 11. Product Principles
+## 11. Product Principles
 
-### 01 — Sound first
+### 01 — Sound First
 
 Audio quality is more important than feature count.
 
-### 02 — Low distraction
+### 02 — Low Distraction
 
 laMyl should improve the working environment, not become another app demanding attention.
 
@@ -798,18 +846,18 @@ laMyl should improve the working environment, not become another app demanding a
 
 The user should press a key and hear the sound immediately.
 
-### 04 — Soft by default
+### 04 — Soft by Default
 
 Default sounds should be comfortable for long sessions.
 
-### 05 — Privacy first
+### 05 — Privacy First
 
 Keyboard events are sensitive.
 
-> **laMyl reacts to your keys.  
+> **laMyl reacts to your keys.
 > It never needs to know what you type.**
 
-### 06 — Feel over specifications
+### 06 — Feel Over Specifications
 
 Do not overwhelm normal users with switch specifications.
 
@@ -825,7 +873,7 @@ Technical details can remain available for enthusiasts.
 
 ---
 
-# 12. Core Differentiator
+## 12. Core Differentiator
 
 The key product opportunity is not:
 
@@ -835,7 +883,7 @@ It is:
 
 > **A better-sounding work environment at any volume.**
 
-### laMyl promise
+### laMyl Promise
 
 > **sounds good. feels better.**
 
@@ -857,15 +905,15 @@ You stay in the flow
 
 ---
 
-# 13. First Development Sprint
+## 13. First Development Sprint
 
-## Sprint 01 — Audio Proof of Concept
+### Sprint 01 — Audio Proof of Concept
 
-### Goal
+#### Goal
 
 Prove that the core interaction feels good.
 
-### Tasks
+#### Tasks
 
 - [ ] Create Swift macOS app.
 - [ ] Add menu bar icon.
@@ -880,7 +928,7 @@ Prove that the core interaction feels good.
 - [ ] Test Low Volume Boost.
 - [ ] Record demo video.
 
-### Success criteria
+#### Success Criteria
 
 > **At 20–30% Mac volume, the keyboard should still sound clear, satisfying and natural.**
 
@@ -888,7 +936,7 @@ If this feels good, continue building the rest of laMyl.
 
 ---
 
-# 14. Backlog Priority Legend
+## 14. Backlog Priority Legend
 
 | Priority | Meaning |
 |---|---|
@@ -899,7 +947,7 @@ If this feels good, continue building the rest of laMyl.
 
 ---
 
-# 15. Product North Star
+## 15. Product North Star
 
 > **laMyl should make people want to keep typing.**
 
