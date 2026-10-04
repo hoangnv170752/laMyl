@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RevenueCatUI
 
 // Brand colors from logo
 extension Color {
@@ -17,16 +18,24 @@ extension Color {
 struct MenuBarView: View {
     @ObservedObject var audioEngine: AudioEngine
     @ObservedObject var keyboardManager: KeyboardManager
+    @StateObject private var supabase = SupabaseManager.shared
+    @StateObject private var syncService = SyncService.shared
+    @StateObject private var revenueCat = RevenueCatManager.shared
 
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 20) {
                     // Header
                     headerSection
 
                     // Key counter
                     keyCounterSection
+
+                    Divider()
+
+                    // Subscription status
+                    SubscriptionStatusView()
 
                     Divider()
 
@@ -47,11 +56,19 @@ struct MenuBarView: View {
 
                     Divider()
 
+                    // Sync section (Pro feature)
+                    if revenueCat.isPro {
+                        syncSection
+                        Divider()
+                    }
+
                     // Preview button
                     previewButton
                 }
                 .padding(20)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .scrollDisabled(false)
 
             Divider()
 
@@ -60,7 +77,7 @@ struct MenuBarView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 12)
         }
-        .frame(width: 320, height: 420)
+        .frame(width: 320, height: 550)
     }
 
     // MARK: - Header
@@ -214,6 +231,228 @@ struct MenuBarView: View {
             }
         }
         .toggleStyle(.switch)
+    }
+
+    // MARK: - Sync Section
+
+    private var syncSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // Header with sync icon
+            HStack {
+                Image(systemName: syncService.status.isSyncing ? "arrow.triangle.2.circlepath" : "icloud")
+                    .font(.body)
+                    .foregroundColor(syncService.isSyncEnabled ? .laMylBlue : .secondary)
+
+                Text("Cloud Sync")
+                    .font(.body)
+                    .fontWeight(.medium)
+
+                Spacer()
+
+                // Sync status badge
+                syncStatusBadge
+            }
+
+            // Sync toggle
+            Toggle(isOn: $syncService.isSyncEnabled) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Auto Sync")
+                        .font(.subheadline)
+                    Text("Sync settings across devices")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .toggleStyle(.switch)
+
+            // Account info card
+            accountInfoView
+
+            // Manual sync button
+            if syncService.isSyncEnabled {
+                Button(action: {
+                    Task {
+                        await syncService.forceSync()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Sync Now")
+                    }
+                    .font(.caption)
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .disabled(syncService.status.isSyncing)
+            }
+        }
+        .padding(12)
+        .background(Color.laMylBlue.opacity(0.05))
+        .cornerRadius(12)
+    }
+
+    private var syncStatusBadge: some View {
+        HStack(spacing: 4) {
+            Circle()
+                .fill(syncStatusColor)
+                .frame(width: 6, height: 6)
+            Text(syncStatusText)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(syncStatusColor.opacity(0.1))
+        .cornerRadius(10)
+    }
+
+    private var syncStatusColor: Color {
+        switch syncService.status {
+        case .idle, .success:
+            return .green
+        case .syncing:
+            return .blue
+        case .error:
+            return .red
+        case .offline:
+            return .orange
+        }
+    }
+
+    private var syncStatusText: String {
+        switch syncService.status {
+        case .idle:
+            if let lastSync = syncService.lastSyncTime {
+                let formatter = RelativeDateTimeFormatter()
+                formatter.unitsStyle = .abbreviated
+                return formatter.localizedString(for: lastSync, relativeTo: Date())
+            }
+            return "Not synced"
+        case .syncing:
+            return "Syncing..."
+        case .success:
+            return "Synced"
+        case .error:
+            return "Error"
+        case .offline:
+            return "Offline"
+        }
+    }
+
+    private var accountInfoView: some View {
+        HStack(spacing: 10) {
+            // Avatar
+            ZStack {
+                Circle()
+                    .fill(accountAvatarColor.opacity(0.2))
+                    .frame(width: 36, height: 36)
+
+                Image(systemName: accountIconName)
+                    .font(.system(size: 16))
+                    .foregroundColor(accountAvatarColor)
+            }
+
+            // Account info
+            VStack(alignment: .leading, spacing: 2) {
+                Text(accountTitle)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                Text(accountSubtitle)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+
+            // Action button
+            accountActionButton
+        }
+        .padding(10)
+        .background(Color.laMylLavender.opacity(0.1))
+        .cornerRadius(10)
+    }
+
+    private var accountIconName: String {
+        switch supabase.authState {
+        case .anonymous:
+            return "person.crop.circle"
+        case .authenticated:
+            return "person.crop.circle.fill.badge.checkmark"
+        case .signedOut, .unknown:
+            return "person.crop.circle.badge.questionmark"
+        }
+    }
+
+    private var accountAvatarColor: Color {
+        switch supabase.authState {
+        case .anonymous:
+            return .orange
+        case .authenticated:
+            return .laMylBlue
+        case .signedOut, .unknown:
+            return .secondary
+        }
+    }
+
+    private var accountTitle: String {
+        switch supabase.authState {
+        case .anonymous:
+            return "Anonymous"
+        case .authenticated(_, let email):
+            return email ?? "Signed In"
+        case .signedOut, .unknown:
+            return "Not Connected"
+        }
+    }
+
+    private var accountSubtitle: String {
+        switch supabase.authState {
+        case .anonymous:
+            return "Sign in to sync across devices"
+        case .authenticated:
+            return "Settings synced"
+        case .signedOut, .unknown:
+            return "Connect to enable sync"
+        }
+    }
+
+    @ViewBuilder
+    private var accountActionButton: some View {
+        switch supabase.authState {
+        case .anonymous:
+            Button("Upgrade") {
+                // TODO: Show sign in sheet
+            }
+            .font(.caption)
+            .buttonStyle(.borderedProminent)
+            .tint(.laMylLavender)
+            .controlSize(.small)
+
+        case .authenticated:
+            Menu {
+                Button("Sign Out", role: .destructive) {
+                    Task {
+                        await supabase.signOut()
+                    }
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+            }
+            .menuStyle(.borderlessButton)
+
+        case .signedOut, .unknown:
+            Button("Connect") {
+                Task {
+                    try? await supabase.signInAnonymously()
+                }
+            }
+            .font(.caption)
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+        }
     }
 
     // MARK: - Preview

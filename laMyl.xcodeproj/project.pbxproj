@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		28E1EEC23071F77A00792F0C /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EEC13071F77A00792F0C /* RevenueCat */; };
+		28E1EEC43071F77A00792F0C /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EEC33071F77A00792F0C /* RevenueCatUI */; };
+		28E1EEC83071FEB700792F0C /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EEC73071FEB700792F0C /* Auth */; };
+		28E1EECA3071FEB700792F0C /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EEC93071FEB700792F0C /* Functions */; };
+		28E1EECC3071FEB700792F0C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EECB3071FEB700792F0C /* PostgREST */; };
+		28E1EECE3071FEB700792F0C /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EECD3071FEB700792F0C /* Realtime */; };
+		28E1EED03071FEB700792F0C /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 28E1EECF3071FEB700792F0C /* Storage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		28E1EE783071D5CB00792F0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +62,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E1EEC43071F77A00792F0C /* RevenueCatUI in Frameworks */,
+				28E1EEC23071F77A00792F0C /* RevenueCat in Frameworks */,
+				28E1EED03071FEB700792F0C /* Storage in Frameworks */,
+				28E1EECA3071FEB700792F0C /* Functions in Frameworks */,
+				28E1EECE3071FEB700792F0C /* Realtime in Frameworks */,
+				28E1EEC83071FEB700792F0C /* Auth in Frameworks */,
+				28E1EECC3071FEB700792F0C /* PostgREST in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +129,13 @@
 			);
 			name = laMyl;
 			packageProductDependencies = (
+				28E1EEC13071F77A00792F0C /* RevenueCat */,
+				28E1EEC33071F77A00792F0C /* RevenueCatUI */,
+				28E1EEC73071FEB700792F0C /* Auth */,
+				28E1EEC93071FEB700792F0C /* Functions */,
+				28E1EECB3071FEB700792F0C /* PostgREST */,
+				28E1EECD3071FEB700792F0C /* Realtime */,
+				28E1EECF3071FEB700792F0C /* Storage */,
 			);
 			productName = laMyl;
 			productReference = 28E1EE683071D5C800792F0C /* laMyl.app */;
@@ -195,6 +219,10 @@
 			);
 			mainGroup = 28E1EE5F3071D5C800792F0C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				28E1EEB83071F16500792F0C /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				28E1EEC03071F77A00792F0C /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 28E1EE693071D5C800792F0C /* Products */;
 			projectDirPath = "";
@@ -571,6 +599,58 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		28E1EEB83071F16500792F0C /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+		28E1EEC03071F77A00792F0C /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.92.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		28E1EEC13071F77A00792F0C /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28E1EEC03071F77A00792F0C /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		28E1EEC33071F77A00792F0C /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28E1EEC03071F77A00792F0C /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
+		28E1EEC73071FEB700792F0C /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Auth;
+		};
+		28E1EEC93071FEB700792F0C /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Functions;
+		};
+		28E1EECB3071FEB700792F0C /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PostgREST;
+		};
+		28E1EECD3071FEB700792F0C /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Realtime;
+		};
+		28E1EECF3071FEB700792F0C /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Storage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 28E1EE603071D5C800792F0C /* Project object */;
 }

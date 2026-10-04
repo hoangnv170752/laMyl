@@ -82,17 +82,17 @@ Users can:
 
 #### P0 — MVP
 
-- [ ] Create macOS application project.
-- [ ] Set up app lifecycle.
-- [ ] Set up Menu Bar app.
-- [ ] No requirement for a persistent main window.
-- [ ] App can run in background.
-- [ ] App can Start / Stop.
-- [ ] App can Quit completely.
-- [ ] Set up required permissions for keyboard input detection.
-- [ ] Handle system-wide keyboard events.
-- [ ] Do not block or modify original keyboard input.
-- [ ] Do not send user keystroke content outside the app.
+- [x] Create macOS application project.
+- [x] Set up app lifecycle.
+- [x] Set up Menu Bar app.
+- [x] No requirement for a persistent main window.
+- [x] App can run in background.
+- [x] App can Start / Stop.
+- [x] App can Quit completely.
+- [x] Set up required permissions for keyboard input detection.
+- [x] Handle system-wide keyboard events.
+- [x] Do not block or modify original keyboard input.
+- [x] Do not send user keystroke content outside the app.
 
 #### Acceptance Criteria
 
@@ -107,26 +107,26 @@ Users can:
 
 #### P0 — MVP
 
-- [ ] Build Audio Engine.
-- [ ] Load audio samples into memory.
-- [ ] Preload frequently used samples.
-- [ ] Map key → sound.
-- [ ] Support press sound.
+- [x] Build Audio Engine.
+- [x] Load audio samples into memory.
+- [x] Preload frequently used samples.
+- [x] Map key → sound.
+- [x] Support press sound.
 - [ ] Support release sound if needed.
-- [ ] Random variation between keystrokes.
+- [x] Random variation between keystrokes.
 - [ ] Subtle random pitch variation.
 - [ ] Random volume variation.
-- [ ] Avoid obvious sound repetition.
-- [ ] Handle multiple consecutive key events.
-- [ ] Voice pooling to prevent excessive audio overlap.
-- [ ] Limit simultaneous audio voices.
+- [x] Avoid obvious sound repetition.
+- [x] Handle multiple consecutive key events.
+- [x] Voice pooling to prevent excessive audio overlap.
+- [x] Limit simultaneous audio voices.
 
 #### P1
 
 - [ ] Velocity-sensitive sound.
 - [ ] Key-specific sound.
-- [ ] Separate spacebar sound.
-- [ ] Separate enter sound.
+- [x] Separate spacebar sound.
+- [x] Separate enter sound.
 - [ ] Separate backspace sound.
 - [ ] Separate modifier key sound.
 - [ ] Different sound for mouse click.
@@ -184,7 +184,7 @@ Goal:
 
 ##### Audio Processing
 
-- [ ] Input gain control.
+- [x] Input gain control.
 - [ ] Loudness normalization.
 - [ ] Gentle compression.
 - [ ] Transient enhancement.
@@ -251,15 +251,15 @@ Quit laMyl
 
 ##### Tasks
 
-- [ ] Menu bar icon.
-- [ ] Popup panel.
+- [x] Menu bar icon.
+- [x] Popup panel.
 - [ ] Current sound indicator.
 - [ ] Sound selector.
-- [ ] Volume slider.
-- [ ] Play / Pause.
-- [ ] Low Volume Boost toggle.
-- [ ] Settings entry.
-- [ ] Quit.
+- [x] Volume slider.
+- [x] Play / Pause.
+- [x] Low Volume Boost toggle.
+- [x] Settings entry.
+- [x] Quit.
 
 ---
 
@@ -267,10 +267,10 @@ Quit laMyl
 
 #### P0
 
-- [ ] Preview button for each sound.
-- [ ] Preview without keyboard event.
-- [ ] Short preview sample.
-- [ ] Preview multiple consecutive keys.
+- [x] Preview button for each sound.
+- [x] Preview without keyboard event.
+- [x] Short preview sample.
+- [x] Preview multiple consecutive keys.
 - [ ] Optional preview loop.
 
 #### P1
@@ -289,19 +289,19 @@ Quit laMyl
 ##### General
 
 - [ ] Launch at login.
-- [ ] Start sound automatically.
-- [ ] Enable / disable keyboard sounds.
+- [x] Start sound automatically.
+- [x] Enable / disable keyboard sounds.
 - [ ] Default sound.
-- [ ] Default volume.
+- [x] Default volume.
 
 ##### Audio
 
-- [ ] Volume.
-- [ ] Low Volume Boost.
+- [x] Volume.
+- [x] Low Volume Boost.
 - [ ] Clarity.
 - [ ] Warmth.
 - [ ] Thock.
-- [ ] Max simultaneous sounds.
+- [x] Max simultaneous sounds.
 
 ##### Privacy
 
@@ -608,7 +608,77 @@ laMyl does not record what you type.
 
 ---
 
-### Epic 17 — App Store Readiness
+### Epic 17 — In-App Purchase & Subscription
+
+#### P0 — Monetization
+
+##### RevenueCat Integration
+
+- [x] Add RevenueCat SDK via SPM.
+- [x] Configure API key from .env file.
+- [x] Implement RevenueCatManager service.
+- [x] Check entitlement `lamyl_pro`.
+- [x] Support Monthly subscription.
+- [x] Support Yearly subscription.
+- [x] Support Lifetime purchase.
+- [x] RevenueCat Paywall presentation.
+- [x] Restore purchases.
+- [x] Subscription status display in UI.
+
+##### Products
+
+- [x] Monthly subscription
+- [x] Yearly subscription (best value)
+- [x] Lifetime one-time purchase
+
+##### UI
+
+- [x] Subscription status badge in menu bar.
+- [x] Upgrade button for free users.
+- [x] Manage subscription for Pro users.
+- [x] Paywall with all purchase options.
+
+---
+
+### Epic 18 — Cloud Sync (Pro Feature)
+
+#### P0 — Pro Users Only
+
+##### Supabase Integration
+
+- [x] Add Supabase Swift SDK.
+- [x] Self-managed users (no Supabase Auth).
+- [x] Device-based user identification.
+- [x] Link with RevenueCat user ID.
+
+##### Sync Features
+
+- [x] Sync user settings to cloud.
+- [x] Sync key statistics.
+- [x] Auto-sync on Pro upgrade.
+- [x] Manual sync button.
+- [x] Sync status indicator.
+- [ ] Sync custom sounds (future).
+
+##### Database Schema
+
+- [x] `profiles` table with device_id, revenuecat_user_id.
+- [x] `user_settings` table.
+- [x] `key_stats` table.
+- [x] `custom_sounds` table.
+- [x] `get_or_create_user` function.
+
+##### UI
+
+- [x] Cloud Sync section (Pro only).
+- [x] Auto Sync toggle.
+- [x] Sync Now button.
+- [x] Last synced time.
+- [x] Sync status badge.
+
+---
+
+### Epic 19 — App Store Readiness
 
 #### P0
 
@@ -741,18 +811,18 @@ Simulate:
 
 The MVP is ready when:
 
-- [ ] laMyl runs as a macOS menu bar app.
-- [ ] User can grant required keyboard permission.
-- [ ] User can type anywhere on Mac and hear keyboard sounds.
+- [x] laMyl runs as a macOS menu bar app.
+- [x] User can grant required keyboard permission.
+- [x] User can type anywhere on Mac and hear keyboard sounds.
 - [ ] At least 5 high-quality sound profiles exist.
 - [ ] Audio latency feels instant.
-- [ ] Sound does not interfere with keyboard input.
-- [ ] Volume can be adjusted.
-- [ ] Low Volume Boost works.
+- [x] Sound does not interfere with keyboard input.
+- [x] Volume can be adjusted.
+- [x] Low Volume Boost works.
 - [ ] App uses very little CPU.
 - [ ] App can launch at login.
-- [ ] App can be paused instantly.
-- [ ] Basic settings work.
+- [x] App can be paused instantly.
+- [x] Basic settings work.
 - [ ] Privacy messaging is clear.
 - [ ] App survives long typing sessions without crashes.
 
@@ -793,13 +863,29 @@ The MVP is ready when:
 - Mood presets
 - Focus mode
 
+### Version 0.6 — Monetization (DONE)
+
+- [x] RevenueCat SDK integration
+- [x] Monthly / Yearly / Lifetime subscriptions
+- [x] Paywall UI
+- [x] Entitlement checking
+- [x] Subscription status in menu bar
+
+### Version 0.7 — Cloud Sync (DONE)
+
+- [x] Supabase integration
+- [x] Self-managed users (device-based)
+- [x] Settings sync for Pro users
+- [x] Key stats sync
+- [x] Auto-sync on Pro upgrade
+
 ### Version 1.0 — Productivity
 
 - Focus timer
 - Custom soundscape
 - Custom presets
 - Statistics
-- Cloud sync if justified
+- Custom sounds sync
 
 ---
 
@@ -915,17 +1001,17 @@ Prove that the core interaction feels good.
 
 #### Tasks
 
-- [ ] Create Swift macOS app.
-- [ ] Add menu bar icon.
-- [ ] Capture keyboard events.
-- [ ] Play one high-quality keyboard sample.
+- [x] Create Swift macOS app.
+- [x] Add menu bar icon.
+- [x] Capture keyboard events.
+- [x] Play one high-quality keyboard sample.
 - [ ] Measure input → audio latency.
-- [ ] Implement voice pooling.
-- [ ] Implement volume control.
+- [x] Implement voice pooling.
+- [x] Implement volume control.
 - [ ] Implement basic limiter.
-- [ ] Test fast typing.
+- [x] Test fast typing.
 - [ ] Test system volume at 10%, 20%, 30%.
-- [ ] Test Low Volume Boost.
+- [x] Test Low Volume Boost.
 - [ ] Record demo video.
 
 #### Success Criteria

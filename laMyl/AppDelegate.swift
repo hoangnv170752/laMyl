@@ -7,6 +7,7 @@
 
 import Cocoa
 import SwiftUI
+import RevenueCat
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
@@ -16,6 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var eventMonitor: Any?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Initialize RevenueCat
+        RevenueCatManager.shared.configure()
+
         // Initialize audio engine
         audioEngine = AudioEngine()
 
@@ -41,6 +45,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self?.popover.performClose(nil)
             }
         }
+
+        // Initialize cloud sync
+        Task {
+            await SyncService.shared.checkPendingSync()
+        }
     }
 
     private func setupMenuBar() {
@@ -53,9 +62,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         popover = NSPopover()
-        popover.contentSize = NSSize(width: 320, height: 480)
+        popover.contentSize = NSSize(width: 320, height: 550)
         popover.behavior = .transient
-        popover.animates = true
+        popover.animates = false // Disable animation to avoid layout issues
         popover.contentViewController = NSHostingController(
             rootView: MenuBarView(
                 audioEngine: audioEngine!,
@@ -81,5 +90,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         keyboardManager?.stopListening()
         audioEngine?.stop()
+
+        // Save pending sync data before terminating
+        SyncService.shared.syncBeforeTerminate()
     }
 }
